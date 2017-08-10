@@ -1,0 +1,91 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:onClick="rotateEvent"
+        android:layout_marginTop="10dp"
+        android:text="旋转" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:onClick="WobbleEvent"
+        android:layout_marginTop="10dp"
+        android:text="变形" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"  android:layout_marginTop="10dp"
+        android:onClick="RippleEvent"
+        android:text="水波" />
+
+    <TextView  android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:onClick="RotateFragmentEvent"
+        android:text="简单的过程纹理" />
+
+    <TextView  android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:onClick="DirectLightEvent"
+        android:text="方向光" />
+
+    <TextView  android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:onClick="PointLightEvent"
+        android:text="点光" />
+
+    <TextView
+        android:text="反射光"
+        android:clickable="true"
+        android:onClick="ReflectLightEvent"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:text="bumpMapping"
+        android:clickable="true"
+        android:onClick="BumpMappintEvent"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:text="射线拾取"
+        android:clickable="true"
+        android:onClick="RayPickupEvent"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:text="天空盒"
+        android:clickable="true"
+        android:onClick="SkyboxEvent"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:text="fbo"
+        android:clickable="true"
+        android:onClick="FboEvent"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

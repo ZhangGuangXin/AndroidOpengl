@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="GBK">
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/object/Vertices3.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/bumpMapping/BumpMappingDemoActivity.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/bumpMapping/BumpMappingtRender.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/directLight/DirectLightDemoActivity.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/directLight/DirectLightRender.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/fbo/FboDemoActivity.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/pointLight/PointLightDemoActivity.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/pointLight/PointLightRender.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/rayPickup/RayPickupDemoActivity.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/rayPickup/RayPickupLightRender.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/reflectLight/ReflectLightDemoActivity.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/reflectLight/ReflectLightRender.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/ripple/RippleDemoActivity.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/ripple/RippleRender.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/rotate/RotateDemoActivity.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/skybox/SkyBoxDemoActivity.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/skybox/SkyBoxRender.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/shaderUtil/VertexBuffer.java" charset="GBK" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>
