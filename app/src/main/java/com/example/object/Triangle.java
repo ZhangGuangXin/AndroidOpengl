@@ -7,6 +7,7 @@
  * Visit http://www.pragmaticprogrammer.com/titles/kbogla for more book information.
 ***/
 package com.example.object;
+import static android.opengl.GLES20.GL_TRIANGLE_FAN;
 import static android.opengl.GLES20.glDrawArrays;
 
 import android.opengl.GLES20;
@@ -40,6 +41,7 @@ public class Triangle {
 //    }
 
     public Triangle(float[] triangleData){
+        this.VERTEX_DATA = triangleData;
         vertexArray = new VertexArray(triangleData);
     }
     
@@ -58,7 +60,7 @@ public class Triangle {
     }
     
     public void draw() {                      
-    	glDrawArrays(GLES20.GL_TRIANGLES, 0, 3);
-//        glDrawArrays(GL_TRIANGLE_FAN, 0, 6);    	 
+//    	glDrawArrays(GLES20.GL_TRIANGLES, 0, 3);
+        glDrawArrays(GL_TRIANGLE_FAN, 0, VERTEX_DATA.length / 4);
     }
 }

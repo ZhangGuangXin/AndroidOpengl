@@ -9,6 +9,7 @@ import com.example.opengldemo.ripple.RippleDemoActivity;
 import com.example.opengldemo.rotate.RotateDemoActivity;
 import com.example.opengldemo.processTexture.ProcessTextureDemoActivity;
 import com.example.opengldemo.skybox.SkyBoxDemoActivity;
+import com.example.opengldemo.sobelOperator.SobelDemoActivity;
 import com.example.opengldemo.wobble.WobbleDemoActivity;
 import com.example.opengldemo.rayPickup.RayPickupDemoActivity;
 
@@ -77,6 +78,11 @@ public class MainActivity extends Activity{
 
 	public void FboEvent(View view){
 		Intent intent = new Intent(this, FboDemoActivity.class);
+		startActivity(intent);
+	}
+
+	public void SobelEvent(View view){
+		Intent intent = new Intent(this, SobelDemoActivity.class);
 		startActivity(intent);
 	}
 }

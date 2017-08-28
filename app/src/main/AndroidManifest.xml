@@ -37,6 +37,7 @@
         <activity android:name=".rayPickup.RayPickupDemoActivity"></activity>
         <activity android:name=".skybox.SkyBoxDemoActivity"></activity>
         <activity android:name=".fbo.FboDemoActivity"></activity>
+        <activity android:name=".sobelOperator.SobelDemoActivity"></activity>
     </application>
 
 </manifest>

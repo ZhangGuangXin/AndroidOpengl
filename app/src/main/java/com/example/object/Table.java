@@ -58,6 +58,6 @@ public class Table {
     
     public void draw() {                      
     	glDrawArrays(GLES20.GL_TRIANGLES, 0, 3);
-//        glDrawArrays(GL_TRIANGLE_FAN, 0, 6);    	 
+//        glDrawArrays(GL_TRIANGLE_FAN, 0, 6);
     }
 }
