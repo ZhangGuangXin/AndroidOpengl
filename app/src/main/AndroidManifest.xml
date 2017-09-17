@@ -38,6 +38,7 @@
         <activity android:name=".skybox.SkyBoxDemoActivity"></activity>
         <activity android:name=".fbo.FboDemoActivity"></activity>
         <activity android:name=".sobelOperator.SobelDemoActivity"></activity>
+        <activity android:name=".GaussianBlur.GaussianBlurDemoActivity"></activity>
     </application>
 
 </manifest>

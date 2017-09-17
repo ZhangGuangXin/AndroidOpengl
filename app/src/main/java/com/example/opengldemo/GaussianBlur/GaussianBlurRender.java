@@ -1,4 +1,4 @@
-package com.example.opengldemo.sobelOperator;
+package com.example.opengldemo.GaussianBlur;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -16,7 +16,7 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 @SuppressLint("NewApi")
-public class SobelRender extends BasicRender {
+public class GaussianBlurRender extends BasicRender {
 	private Activity activity;
 	private int tableTexture;
 
@@ -26,22 +26,32 @@ public class SobelRender extends BasicRender {
 	private final float[] modelMatrix = new float[16];
 	private float[] viewProjectMatrix = new float[16];
 
-	private BasicShaderProgram textureShader;
 	private BasicShaderProgram normalShader;
+	private GussianBlurShaderProgram horizontalGaussianBlurShader;
+	private GussianBlurShaderProgram veritalGaussianBlurShader;
 	private Triangle table;
 	private float xAngle = 0;
 	private float yAngle = 0;
 	private float rotateAngle = 0;
 
 	private int[] defaultFbo = new int[1];
-	private int [] customFbo = new int[1];
+	private int [] firstFbo = new int[1];
+	private int [] secondFbo = new int[1];
 	private int[] depthFrameBuffer = new int[1];
-	private int[] currentFboTexture = new int[1];
+	private int[] firstFboTexture = new int[1];
+	private int[] secondFboTexture = new int[1];
 
 	private int screenWidth, screenHeight;
+	int step = 10; //��˹ģ���Ĳ���
+	private float[] grivityMatrix;
 
-	public SobelRender(Activity activity) {
+	public GaussianBlurRender(Activity activity) {
 		this.activity = activity;
+
+		float sigma = 0.5f;//����
+//		grivityMatrix = GaosiUtil.get2DKernalData(step, sigma);//GaosiUtil.get2(GaosiUtil.get2DKernalData(step, sigma));//�����˹Ȩ��
+//		grivityMatrix = GaosiUtil.get2(grivityMatrix);
+		grivityMatrix = GaosiUtil.getWeight(0.5f, step);
 	}
 
 	@Override
@@ -51,12 +61,14 @@ public class SobelRender extends BasicRender {
 		GLES20.glEnable(GLES20.GL_DEPTH_TEST);
 		// GLES20.glEnable(GLES20.GL_CULL_FACE);
 
-		createCustomFbo();
+		createHorizontalFbo();
+		createVertialFbo();
 
 		tableTexture = TextureHelper.loadTexture(activity, R.drawable.cat);
-		normalShader =  new BasicShaderProgram(activity, R.raw.rotate_vertex_shader, R.raw.rotate_fragment_shader);
-		textureShader = new BasicShaderProgram(activity, R.raw.rotate_vertex_shader, R.raw.sobel_fragment_shader);
 
+		normalShader =  new BasicShaderProgram(activity, R.raw.rotate_vertex_shader, R.raw.rotate_fragment_shader);
+		horizontalGaussianBlurShader = new GussianBlurShaderProgram(activity, R.raw.rotate_vertex_shader, R.raw.horitzontal_gussian_blure_fargment);
+		veritalGaussianBlurShader = new GussianBlurShaderProgram(activity, R.raw.rotate_vertex_shader, R.raw.verital_gussian_blur_fragment);
 		table = new Triangle(new float[] {
 				0f,    0f,     0.5f, 0.5f,
 				-0.5f, -0.8f,  0f,   0.9f,
@@ -66,28 +78,59 @@ public class SobelRender extends BasicRender {
 				-0.5f, -0.8f,   0f, 0.9f});
 	}
 
-	private void createCustomFbo(){
+	private void createHorizontalFbo(){
 		GLES20.glGetIntegerv(GLES20.GL_FRAMEBUFFER_BINDING, defaultFbo, 0);
-		GLES20.glGenFramebuffers(1, customFbo, 0);
+		GLES20.glGenFramebuffers(1, firstFbo, 0);
 		GLES20.glGenRenderbuffers(1, depthFrameBuffer, 0);
 		GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER, depthFrameBuffer[0]);
 		GLES20.glRenderbufferStorage(GLES20.GL_RENDERBUFFER, GLES20.GL_DEPTH_COMPONENT16, 256, 256);
-		GLES20.glGenTextures(1, currentFboTexture, 0);
-		GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, currentFboTexture[0]);
+		GLES20.glGenTextures(1, firstFboTexture, 0);
+		GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, firstFboTexture[0]);
 		GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGB, 256, 256, 0,
 				GLES20.GL_RGB, GLES20.GL_UNSIGNED_SHORT_5_6_5, null);
 		GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR);
 		GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR);
 		GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE);
 		GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE);
-		GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, customFbo[0]);
+		GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, firstFbo[0]);
 		GLES20.glFramebufferTexture2D(GLES20.GL_FRAMEBUFFER, GLES20.GL_COLOR_ATTACHMENT0,
-				GLES20.GL_TEXTURE_2D, currentFboTexture[0], 0);
+				GLES20.GL_TEXTURE_2D, firstFboTexture[0], 0);
 		GLES20.glFramebufferRenderbuffer(GLES20.GL_FRAMEBUFFER, GLES20.GL_DEPTH_ATTACHMENT,
 				GLES20.GL_RENDERBUFFER, depthFrameBuffer[0]);
 		int status = GLES20.glCheckFramebufferStatus(GLES20.GL_FRAMEBUFFER);
 		if(status == GLES20.GL_FRAMEBUFFER_COMPLETE){
-			GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, customFbo[0]);
+			GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, firstFbo[0]);
+			GLES20.glViewport(0, 0, 256, 256);
+			GLES20.glClearColor(0F, 1F, 1F, 0F);
+
+			GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, defaultFbo[0]);
+			GLES20.glViewport(0, 0, screenWidth, screenHeight);
+			GLES20.glClearColor(1F, 1F, 1F, 0F);
+		}
+	}
+
+	private void createVertialFbo(){
+		GLES20.glGetIntegerv(GLES20.GL_FRAMEBUFFER_BINDING, defaultFbo, 0);
+		GLES20.glGenFramebuffers(1, secondFbo, 0);
+//		GLES20.glGenRenderbuffers(1, depthFrameBuffer, 0);
+//		GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER, depthFrameBuffer[0]);
+		GLES20.glRenderbufferStorage(GLES20.GL_RENDERBUFFER, GLES20.GL_DEPTH_COMPONENT16, 256, 256);
+		GLES20.glGenTextures(1, secondFboTexture, 0);
+		GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, secondFboTexture[0]);
+		GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGB, 256, 256, 0,
+				GLES20.GL_RGB, GLES20.GL_UNSIGNED_SHORT_5_6_5, null);
+		GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR);
+		GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR);
+		GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE);
+		GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE);
+		GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, secondFbo[0]);
+		GLES20.glFramebufferTexture2D(GLES20.GL_FRAMEBUFFER, GLES20.GL_COLOR_ATTACHMENT0,
+				GLES20.GL_TEXTURE_2D, secondFboTexture[0], 0);
+//		GLES20.glFramebufferRenderbuffer(GLES20.GL_FRAMEBUFFER, GLES20.GL_DEPTH_ATTACHMENT,
+//				GLES20.GL_RENDERBUFFER, depthFrameBuffer[0]);
+		int status = GLES20.glCheckFramebufferStatus(GLES20.GL_FRAMEBUFFER);
+		if(status == GLES20.GL_FRAMEBUFFER_COMPLETE){
+			GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, secondFbo[0]);
 			GLES20.glViewport(0, 0, 256, 256);
 			GLES20.glClearColor(0F, 1F, 1F, 0F);
 
@@ -123,14 +166,14 @@ public class SobelRender extends BasicRender {
 	}
 
 	@Override
- 	public void onDrawFrame(GL10 arg0) {
-		drawCustomFbo();
-
-		drawDefaultFbo();
+	public void onDrawFrame(GL10 arg0) {
+		drawObject();//drawHorizontalFbo
+		drawHorizontalFbo();
+		drawVeritalFbo();
 	}
 
-	private void drawCustomFbo(){
-		GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, customFbo[0]);
+	private void drawObject(){
+		GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, firstFbo[0]);
 		GLES20.glViewport(0, 0, 256, 256);
 		GLES20.glClearColor(0F, 1F, 1F, 0F);
 		GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
@@ -141,14 +184,29 @@ public class SobelRender extends BasicRender {
 		table.draw();// triangle
 	}
 
-	private void drawDefaultFbo(){
+	private void drawHorizontalFbo(){
+		GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, secondFbo[0]);
+		GLES20.glViewport(0, 0, 256, 256);
+		GLES20.glClearColor(0F, 1F, 1F, 0F);
+		GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
+		horizontalGaussianBlurShader.useProgram();
+		float[] matrix = getOrthoM();
+		horizontalGaussianBlurShader.setUniform(matrix, firstFboTexture[0]);
+		horizontalGaussianBlurShader.setGrivityMatrix(grivityMatrix);
+		table.bindData(horizontalGaussianBlurShader);
+		table.draw();// triangle
+	}
+
+	private void drawVeritalFbo(){
 		GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, defaultFbo[0]);
 		GLES20.glViewport(0, 0, screenWidth, screenHeight);
 		GLES20.glClearColor(1F, 1F, 1F, 0F);
 		GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
-		textureShader.useProgram();
-		textureShader.setUniform(getDefaultFboMatrix(), currentFboTexture[0]);
-		table.bindData(textureShader);
+		veritalGaussianBlurShader.useProgram();
+//		veritalGaussianBlurShader.setUniform(getDefaultFboMatrix(), secondFboTexture[0]);
+		veritalGaussianBlurShader.setUniform(getOrthoM(), firstFboTexture[0]);
+		veritalGaussianBlurShader.setGrivityMatrix(grivityMatrix);
+		table.bindData(veritalGaussianBlurShader);
 		table.draw();// triangle
 	}
 
@@ -167,10 +225,17 @@ public class SobelRender extends BasicRender {
 		System.arraycopy(temp, 0, resultMatrix, 0, temp.length);
 		rotateAngle++;
 		return resultMatrix;
+
+	}
+
+	private float[] getOrthoM(){
+		float[] temp = new float[16];
+		Matrix.orthoM(temp, 0, -2, 2, -2, 2, -1, 1);
+		return temp;
 	}
 
 	private float[] getDefaultFboMatrix() {
-		/*Matrix.multiplyMM(viewProjectMatrix, 0, projectionMatrix, 0, viewMatrix, 0);
+		Matrix.multiplyMM(viewProjectMatrix, 0, projectionMatrix, 0, viewMatrix, 0);
 
 		Matrix.setIdentityM(modelMatrix, 0);
 
@@ -184,11 +249,7 @@ public class SobelRender extends BasicRender {
 		Matrix.multiplyMM(temp, 0, viewProjectMatrix, 0, modelMatrix, 0);
 		System.arraycopy(temp, 0, resultMatrix, 0, temp.length);
 //		rotateAngle++;
-		return resultMatrix;*/
-
-		float[] temp = new float[16];
-		Matrix.orthoM(temp, 0, -2, 2, -2, 2, -1, 1);
-		return temp;
+		return resultMatrix;
 	}
 
 	public void rotate(float xAngle, float yAngle) {

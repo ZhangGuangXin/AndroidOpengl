@@ -26,7 +26,7 @@ void main()
 //    gl_FragColor = vec4(distance, distance, distance, 1.0);
 
     // Check frequency change with given threshold
-    if ((distance = px*px+py*py) > 0.25 ){
+    if ((distance = px*px+py*py) > 0.15 ){
         gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0);
     }else{
      gl_FragColor = vec4(1.0);

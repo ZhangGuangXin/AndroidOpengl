@@ -1,5 +1,6 @@
 package com.example.opengldemo;
 
+import com.example.opengldemo.GaussianBlur.GaussianBlurDemoActivity;
 import com.example.opengldemo.bumpMapping.BumpMappingDemoActivity;
 import com.example.opengldemo.directLight.DirectLightDemoActivity;
 import com.example.opengldemo.fbo.FboDemoActivity;
@@ -83,6 +84,11 @@ public class MainActivity extends Activity{
 
 	public void SobelEvent(View view){
 		Intent intent = new Intent(this, SobelDemoActivity.class);
+		startActivity(intent);
+	}
+
+	public void GaussianBlureEvent(View view){
+		Intent intent = new Intent(this, GaussianBlurDemoActivity.class);
 		startActivity(intent);
 	}
 }
