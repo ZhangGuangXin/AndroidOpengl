@@ -2,6 +2,8 @@
 <project version="4">
   <component name="Encoding" defaultCharsetForPropertiesFiles="GBK">
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/object/Vertices3.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/GaussianBlur/GaussianBlurDemoActivity.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/GaussianBlur/GaussianBlurRender.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/bumpMapping/BumpMappingDemoActivity.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/bumpMapping/BumpMappingtRender.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/directLight/DirectLightDemoActivity.java" charset="GBK" />
@@ -19,7 +21,6 @@
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/skybox/SkyBoxDemoActivity.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/skybox/SkyBoxRender.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/sobelOperator/SobelDemoActivity.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/sobelOperator/SobelRender.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/sobelOperator/SobelRender.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/shaderUtil/VertexBuffer.java" charset="GBK" />
     <file url="PROJECT" charset="UTF-8" />
