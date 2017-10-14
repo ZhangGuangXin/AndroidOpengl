@@ -15,6 +15,9 @@ import com.example.shaderUtil.TextureHelper;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
+/**
+ * губл
+ */
 @SuppressLint("NewApi")
 public class FishEyeRender extends BasicRender {
 	private Activity activity;
