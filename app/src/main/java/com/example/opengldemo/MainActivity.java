@@ -3,7 +3,9 @@ package com.example.opengldemo;
 import com.example.opengldemo.GaussianBlur.GaussianBlurDemoActivity;
 import com.example.opengldemo.bumpMapping.BumpMappingDemoActivity;
 import com.example.opengldemo.directLight.DirectLightDemoActivity;
+import com.example.opengldemo.embossed.EmbossedDemoActivity;
 import com.example.opengldemo.fbo.FboDemoActivity;
+import com.example.opengldemo.fishEye.FishEyeDemoActivity;
 import com.example.opengldemo.pointLight.PointLightDemoActivity;
 import com.example.opengldemo.reflectLight.ReflectLightDemoActivity;
 import com.example.opengldemo.ripple.RippleDemoActivity;
@@ -11,6 +13,7 @@ import com.example.opengldemo.rotate.RotateDemoActivity;
 import com.example.opengldemo.processTexture.ProcessTextureDemoActivity;
 import com.example.opengldemo.skybox.SkyBoxDemoActivity;
 import com.example.opengldemo.sobelOperator.SobelDemoActivity;
+import com.example.opengldemo.twirl.TwirlDemoActivity;
 import com.example.opengldemo.wobble.WobbleDemoActivity;
 import com.example.opengldemo.rayPickup.RayPickupDemoActivity;
 
@@ -89,6 +92,21 @@ public class MainActivity extends Activity{
 
 	public void GaussianBlureEvent(View view){
 		Intent intent = new Intent(this, GaussianBlurDemoActivity.class);
+		startActivity(intent);
+	}
+
+	public void fishEyeEvent(View view){
+		Intent intent = new Intent(this, FishEyeDemoActivity.class);
+		startActivity(intent);
+	}
+
+	public void EmbossedEvent(View view){
+		Intent intent = new Intent(this, EmbossedDemoActivity.class);
+		startActivity(intent);
+	}
+
+	public void twirlEvent(View view){
+		Intent intent = new Intent(this, TwirlDemoActivity.class);
 		startActivity(intent);
 	}
 }

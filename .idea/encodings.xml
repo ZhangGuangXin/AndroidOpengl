@@ -8,7 +8,11 @@
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/bumpMapping/BumpMappingtRender.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/directLight/DirectLightDemoActivity.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/directLight/DirectLightRender.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/embossed/EmbossedDemoActivity.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/embossed/EmbossedRender.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/fbo/FboDemoActivity.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/fishEye/FishEyeDemoActivity.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/fishEye/FishEyeRender.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/pointLight/PointLightDemoActivity.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/pointLight/PointLightRender.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/rayPickup/RayPickupDemoActivity.java" charset="GBK" />
@@ -22,6 +26,8 @@
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/skybox/SkyBoxRender.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/sobelOperator/SobelDemoActivity.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/sobelOperator/SobelRender.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/twirl/TwirlDemoActivity.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/twirl/TwirlRender.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/shaderUtil/VertexBuffer.java" charset="GBK" />
     <file url="PROJECT" charset="UTF-8" />
   </component>

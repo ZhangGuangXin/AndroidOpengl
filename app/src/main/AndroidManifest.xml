@@ -39,6 +39,9 @@
         <activity android:name=".fbo.FboDemoActivity"></activity>
         <activity android:name=".sobelOperator.SobelDemoActivity"></activity>
         <activity android:name=".GaussianBlur.GaussianBlurDemoActivity"></activity>
+        <activity android:name=".embossed.EmbossedDemoActivity"></activity>
+        <activity android:name=".fishEye.FishEyeDemoActivity"></activity>
+        <activity android:name=".twirl.TwirlDemoActivity"></activity>
     </application>
 
 </manifest>
