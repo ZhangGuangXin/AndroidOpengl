@@ -2,7 +2,7 @@
 #### 简单的android opengl实现案例，涉及矩阵复合操作，物体变形，纹理动画，光照，射线拾取，天空盒，fbo等技术。在com.example.opengldemo包中又分多个子包，各个功能如下：
 #### rotate包中，实现三个物体相互围绕运动。
 #### wobble包中，实现一个物体顶点变化的动画。
-#### ripple包中，实现一个水面波浪的效果。
+#### ripple包中，实现一个带水纹效果的相机。
 #### processTexture包中，实现一个简单的过程纹理。
 #### directLight包中，实现一个方向光的效果。
 #### pointLight包中，实现一个点光的漫反射效果。
