@@ -16,4 +16,5 @@
 #### embossed包中，实现一个简单的浮雕效果
 #### fishEye包中，实现一个简单的鱼眼效果
 #### twril包中，实现一个漩涡扭曲的效果
-####  shadowMapping包中，实现一个光照下阴影的效果
+#### shadowMapping包中，实现一个光照下阴影的效果
+#### normalmapping包中，实现一个normalmapping的效果 
