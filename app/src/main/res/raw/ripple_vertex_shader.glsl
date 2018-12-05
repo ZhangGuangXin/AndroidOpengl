@@ -36,10 +36,10 @@ vec4 getPositon(vec4 originPosition){
     //
     //	}else
     //	{
-//             if(distance < time*10.0){
-//                  vertextY += sin( 2.0 * PI * distance * (FREQUENCY + time / 2.0))* (RIPPLE_AMPLITUDE - time);
-//                  centerCount = centerCount + 1.0;
-//             }
+             if(distance < time*10.0){
+                  vertextY += sin( 2.0 * PI * distance * (FREQUENCY + time / 2.0))* (RIPPLE_AMPLITUDE - time);
+                  centerCount = centerCount + 1.0;
+             }
              if(secondDistance < time *10.0){
                   vertextY += sin( 2.0 * PI * secondDistance * (FREQUENCY + time / 2.0))* (RIPPLE_AMPLITUDE - time);
                   centerCount = centerCount + 1.0;

@@ -8,6 +8,7 @@
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/bumpMapping/BumpMappingtRender.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/directLight/DirectLightDemoActivity.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/directLight/DirectLightRender.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/egl/EGLPBHelper.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/embossed/EmbossedDemoActivity.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/embossed/EmbossedRender.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/fbo/FboDemoActivity.java" charset="GBK" />

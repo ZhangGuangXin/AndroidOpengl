@@ -36,12 +36,17 @@ public class TwirlRender extends BasicRender {
 	private int[] defaultFbo = new int[1];
 	private int [] customFbo = new int[1];
 	private int[] depthFrameBuffer = new int[1];
-	private int[] currentFboTexture = new int[1];
+	private static int[] currentFboTexture = null;
+	private boolean isDrawFbo = false;
 
 	private int screenWidth, screenHeight;
 
 	public TwirlRender(Activity activity) {
 		this.activity = activity;
+	}
+
+	public void setDrawFbo(boolean drawFbo) {
+		isDrawFbo = drawFbo;
 	}
 
 	@Override
@@ -51,10 +56,16 @@ public class TwirlRender extends BasicRender {
 		GLES20.glEnable(GLES20.GL_DEPTH_TEST);
 		// GLES20.glEnable(GLES20.GL_CULL_FACE);
 
-		createCustomFbo();
+		if(isDrawFbo) {
+			createCustomFbo();
+		}
 
 		tableTexture = TextureHelper.loadTexture(activity, R.drawable.cat);
-		normalShader =  new BasicShaderProgram(activity, R.raw.rotate_vertex_shader, R.raw.rotate_fragment_shader);
+		if(isDrawFbo){
+			normalShader =  new BasicShaderProgram(activity, R.raw.rotate_vertex_shader, R.raw.rotate_fragment_shader);
+		}else {
+			normalShader =  new BasicShaderProgram(activity, R.raw.rotate_vertex_shader, R.raw.test_fragment_shader);
+		}
 		textureShader = new TwirlShaderProgram(activity, R.raw.rotate_vertex_shader, R.raw.twirl_fragment);
 
 		table = new Triangle(new float[] {
@@ -72,8 +83,13 @@ public class TwirlRender extends BasicRender {
 		GLES20.glGenRenderbuffers(1, depthFrameBuffer, 0);
 		GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER, depthFrameBuffer[0]);
 		GLES20.glRenderbufferStorage(GLES20.GL_RENDERBUFFER, GLES20.GL_DEPTH_COMPONENT16, 256, 256);
-		GLES20.glGenTextures(1, currentFboTexture, 0);
-		GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, currentFboTexture[0]);
+		if(currentFboTexture == null)
+		{
+			currentFboTexture = new int[1];
+			GLES20.glGenTextures(1, currentFboTexture, 0);
+			GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, currentFboTexture[0]);
+		}
+//		GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, currentFboTexture[0]);
 		GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGB, 256, 256, 0,
 				GLES20.GL_RGB, GLES20.GL_UNSIGNED_SHORT_5_6_5, null);
 		GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR);
@@ -121,12 +137,24 @@ public class TwirlRender extends BasicRender {
 		Matrix.translateM(fboViewMatrix, 0, 0, 0, 0.5f);
 //		Matrix.translateM(fboViewMatrix, 0, 0, -1, 0);
 	}
-
+ 
 	@Override
  	public void onDrawFrame(GL10 arg0) {
-		drawCustomFbo();
-
-		drawDefaultFbo();
+//		if(currentFboTexture == null){
+//			return;
+//		}
+		
+//		try{
+			if (isDrawFbo) {
+				drawCustomFbo();
+//				drawTexture();
+				drawDefaultFbo();
+			} else {
+				drawDefaultFbo();
+			}	
+//		}catch(Exception e){
+//			e.printStackTrace();
+//		}
 	}
 
 	private void drawCustomFbo(){
@@ -141,8 +169,22 @@ public class TwirlRender extends BasicRender {
 		table.draw();// triangle
 	}
 
+	private void drawTexture(){
+		GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, customFbo[0]);
+		GLES20.glViewport(0, 0, screenWidth, screenHeight);
+		GLES20.glClearColor(1F, 1F, 1F, 0F);
+		GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
+		textureShader.useProgram();
+		textureShader.setUniform(getDefaultFboMatrix(), currentFboTexture[0]);
+		textureShader.setAngle(angle);
+		angle += 0.01f;
+		table.bindData(textureShader);
+		table.draw();// triangle
+	}
+
 	private float angle = 0.1f;
 	private void drawDefaultFbo(){
+		
 		GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, defaultFbo[0]);
 		GLES20.glViewport(0, 0, screenWidth, screenHeight);
 		GLES20.glClearColor(1F, 1F, 1F, 0F);
@@ -191,11 +233,23 @@ public class TwirlRender extends BasicRender {
 
 		float[] temp = new float[16];
 		Matrix.orthoM(temp, 0, -2, 2, -2, 2, -1, 1);
+		Matrix.rotateM(temp, 0, xAngle, 1f, 0f, 0f);
+		Matrix.rotateM(temp, 0, yAngle, 0f, 1f, 0f);
 		return temp;
 	}
 
 	public void rotate(float xAngle, float yAngle) {
 		this.xAngle += xAngle;
 		this.yAngle += yAngle;
+	}
+	
+	public void destroy(){
+		int[] textureArray = {tableTexture};
+		GLES20.glDeleteTextures(1, textureArray, 0);
+		
+		if(currentFboTexture != null){
+			GLES20.glDeleteTextures(1, currentFboTexture, 0);
+			currentFboTexture = null;
+		}
 	}
 }

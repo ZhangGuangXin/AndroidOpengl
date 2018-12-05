@@ -3,9 +3,6 @@ package com.example.opengldemo.processTexture;
 import android.app.Activity;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.View.OnTouchListener;
 
 import com.example.ViewThouchListener;
 

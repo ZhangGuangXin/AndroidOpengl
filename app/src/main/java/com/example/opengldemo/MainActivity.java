@@ -53,17 +53,17 @@ public class MainActivity extends Activity{
 		Intent intent = new Intent(this, RotateDemoActivity.class);
 		startActivity(intent);
 	}
-	
+
 	public void WobbleEvent(View view){
 		Intent intent = new Intent(this, WobbleDemoActivity.class);
 		startActivity(intent);
 	}
-	
+
 	public void RippleEvent(View view){
 		Intent intent = new Intent(this, RippleDemoActivity.class);
 		startActivity(intent);
 	}
-	
+
 	public void RotateFragmentEvent(View view){
 		Intent intent = new Intent(this, ProcessTextureDemoActivity.class);
 		startActivity(intent);
@@ -133,7 +133,7 @@ public class MainActivity extends Activity{
 		Intent intent = new Intent(this, EglTestActivity.class);
 		startActivity(intent);
 	}
-	
+
 	public void shadowEvent(View view){
 		Intent intent = new Intent(this, ShadowMappingtDemoActivity.class);
 		startActivity(intent);

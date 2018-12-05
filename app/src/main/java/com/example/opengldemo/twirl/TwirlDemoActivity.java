@@ -24,6 +24,7 @@ public class TwirlDemoActivity extends Activity {
 		view.setEGLContextClientVersion(2);
 		view.setEGLConfigChooser(8, 8, 8, 8, 16, 0);
 		render = new TwirlRender(this);
+		render.setDrawFbo(true);
 		view.setRenderer(render);
 
 		ViewThouchListener touchListener = new ViewThouchListener(view, render);

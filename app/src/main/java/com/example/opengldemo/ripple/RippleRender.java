@@ -13,8 +13,10 @@ import com.example.shaderUtil.RayPickupUtil;
 import com.example.shaderUtil.TextureHelper;
 import com.example.object.Vertices3;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
@@ -23,8 +25,13 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.GLSurfaceView.Renderer;
 import android.opengl.Matrix;
+import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.Surface;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -388,4 +395,5 @@ public class RippleRender extends BasicRender {
         }
         return returnResult;
     }
+
 }

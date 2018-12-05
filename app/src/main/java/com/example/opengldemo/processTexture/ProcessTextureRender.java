@@ -1,22 +1,19 @@
 package com.example.opengldemo.processTexture;
 
-import javax.microedition.khronos.egl.EGLConfig;
-import javax.microedition.khronos.opengles.GL10;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.opengl.GLES20;
+import android.opengl.Matrix;
 
 import com.example.BasicRender;
+import com.example.object.Vertices3;
 import com.example.opengldemo.R;
 import com.example.shaderUtil.MatrixHelper;
 import com.example.shaderUtil.ObjLoader;
 import com.example.shaderUtil.TextureHelper;
-import com.example.shaderUtil.TextureShaderProgram;
-import com.example.object.Vertices3;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.graphics.Bitmap;
-import android.opengl.GLES20;
-import android.opengl.GLSurfaceView.Renderer;
-import android.opengl.Matrix;
+import javax.microedition.khronos.egl.EGLConfig;
+import javax.microedition.khronos.opengles.GL10;
 
 @SuppressLint("NewApi")
 public class ProcessTextureRender extends BasicRender {
@@ -42,7 +39,7 @@ public class ProcessTextureRender extends BasicRender {
 		GLES20.glClearColor(1F, 1F, 1F, 0F);
 
 		GLES20.glEnable(GLES20.GL_DEPTH_TEST);
-		// GLES20.glEnable(GLES20.GL_CULL_FACE);
+		GLES20.glDisable(GLES20.GL_CULL_FACE);
 
 		meshTexture = TextureHelper.loadTexture(activity, R.drawable.face);
 		
