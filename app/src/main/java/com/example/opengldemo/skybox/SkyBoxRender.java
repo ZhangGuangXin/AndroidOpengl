@@ -9,6 +9,7 @@ import com.example.BasicRender;
 import com.example.object.Skybox;
 import com.example.opengldemo.R;
 import com.example.opengldemo.reflectLight.CommonShaderProgram;
+import com.example.opengldemo.reflectLight.SkyboxShaderProgam;
 import com.example.shaderUtil.MatrixHelper;
 import com.example.shaderUtil.ObjLoader;
 import com.example.shaderUtil.SkyboxShaderProgram;
@@ -36,7 +37,7 @@ public class SkyBoxRender extends BasicRender{
 	private float[] viewProjectMatrix = new float[16];
 
 	private int tableTexture;
-	private CommonShaderProgram textureShader;
+	private SkyboxShaderProgam textureShader;
 	private Vertices3 mesh;
 
 	private SkyboxShaderProgram skyboxProgram;
@@ -56,7 +57,7 @@ public class SkyBoxRender extends BasicRender{
 
 
 		tableTexture = TextureHelper.loadTexture(activity, R.drawable.air_hockey_surface);
-		textureShader = new CommonShaderProgram(activity,
+		textureShader = new SkyboxShaderProgam(activity,
 				R.raw.reflect_light_vertext, R.raw.reflect_light_fragment);
 		mesh = ObjLoader.load(activity, R.raw.cube);
 
@@ -114,6 +115,7 @@ public class SkyBoxRender extends BasicRender{
 		Matrix.multiplyMV(pointLight, 0, viewMatrix, 0, pointLight, 0);
 		textureShader.setPointLightUniform(pointLight);
 		textureShader.setLightMatrix(modelViewMatrix, it_modelViewMatrix);
+		textureShader.setSkyCube(skyboxTexture);
 
 		int normalLocation = textureShader.getNormalCoordinatesLocation();
 		mesh.bind(textureShader.getPositionLocation(),
