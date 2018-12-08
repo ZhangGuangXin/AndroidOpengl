@@ -27,11 +27,11 @@ void main()
     if(cubeNormal.z < 0.0){
         cubeNormal.z = -cubeNormal.z;
     }
-    vec3 cuberReflect = reflect(toPointLight, cubeNormal);
+    vec3 cuberReflect = reflect(-toPointLight, cubeNormal);
     vec4 skyColor = textureCube(skyCube, cuberReflect);
 
     float intensity = pow(max(dot(reflect, viewer), 0.0), 1.0);
     vec4 TextureWood = texture2D(u_TextureUnit, v_TextureCoordinates+textureMove);
       float diffcuse = max(0.0, dot(eyeSpaceNormal, toPointLight));
-    gl_FragColor = (TextureWood * LightColor * intensity) * (skyColor * 0.6);
+    gl_FragColor = (TextureWood * LightColor * intensity * 0.6) + (skyColor * 0.4);
 }
