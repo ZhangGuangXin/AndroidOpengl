@@ -26,6 +26,7 @@ public class SkyBoxRender extends BasicRender{
 	private float xAngle = 0;
 	private float yAngle = 0;
 
+	private final float[] matrixForSky = new float[16];
 	private final float[] projectionMatrix = new float[16];
 	private final float[] viewMatrix = new float[16];
 	private final float[] viewProjectionMatrix = new float[16];
@@ -115,7 +116,7 @@ public class SkyBoxRender extends BasicRender{
 		Matrix.multiplyMV(pointLight, 0, viewMatrix, 0, pointLight, 0);
 		textureShader.setPointLightUniform(pointLight);
 		textureShader.setLightMatrix(modelViewMatrix, it_modelViewMatrix);
-		textureShader.setSkyCube(skyboxTexture);
+		textureShader.setSkyCube(skyboxTexture, matrixForSky);
 
 		int normalLocation = textureShader.getNormalCoordinatesLocation();
 		mesh.bind(textureShader.getPositionLocation(),
@@ -128,6 +129,8 @@ public class SkyBoxRender extends BasicRender{
 		Matrix.setIdentityM(viewMatrix, 0);
 		Matrix.rotateM(viewMatrix, 0, xAngle, 1f, 0f, 0f);
 		Matrix.rotateM(viewMatrix, 0, yAngle, 0f, 1f, 0f);
+		//matrixForSky
+		System.arraycopy(viewMatrix, 0, matrixForSky, 0, viewMatrix.length);
 		Matrix.multiplyMM(viewProjectionMatrix, 0, projectionMatrix, 0, viewMatrix, 0);
 		return  viewProjectionMatrix;
 	}
@@ -140,7 +143,7 @@ public class SkyBoxRender extends BasicRender{
 		Matrix.translateM(modelMatrix, 0, 0f, -2f, -6f);
 //		Matrix.rotateM(modelMatrix, 0, xAngle, 1f, 0f, 0f);
 		Matrix.rotateM(modelMatrix, 0, cubuRotateY, 0f, 1f, 0f);
-		cubuRotateY += 0.4f;
+		cubuRotateY += 0.2f;
 		float[] temp = new float[16];
 		float[] resultMatrix = new float[16];
 		Matrix.multiplyMM(temp, 0, viewProjectMatrix, 0, modelMatrix, 0);
