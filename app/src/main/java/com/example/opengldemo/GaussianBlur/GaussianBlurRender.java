@@ -161,7 +161,7 @@ public class GaussianBlurRender extends BasicRender {
 				0f, 0f, 1f,
 				0f, 0.0f, -1f,
 				0f, 1f, 0f);
-		Matrix.translateM(fboViewMatrix, 0, 0, 0, 0.5f);
+		Matrix.translateM(fboViewMatrix, 0, 0, 0, 0.6f);
 //		Matrix.translateM(fboViewMatrix, 0, 0, -1, 0);
 	}
 

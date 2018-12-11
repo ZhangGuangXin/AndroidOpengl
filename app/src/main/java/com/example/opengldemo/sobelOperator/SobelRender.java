@@ -118,7 +118,7 @@ public class SobelRender extends BasicRender {
 				0f, 0f, 1f,
 				0f, 0.0f, -1f,
 				0f, 1f, 0f);
-		Matrix.translateM(fboViewMatrix, 0, 0, 0, 0.5f);
+		Matrix.translateM(fboViewMatrix, 0, 0, 0, 0.6f);
 //		Matrix.translateM(fboViewMatrix, 0, 0, -1, 0);
 	}
 
@@ -132,7 +132,7 @@ public class SobelRender extends BasicRender {
 	private void drawCustomFbo(){
 		GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, customFbo[0]);
 		GLES20.glViewport(0, 0, 256, 256);
-		GLES20.glClearColor(0F, 1F, 1F, 0F);
+		GLES20.glClearColor(1F, 0F, 0F, 0F);
 		GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
 		normalShader.useProgram();
 		float[] matrix = getCustomFboMatrix();
@@ -194,5 +194,11 @@ public class SobelRender extends BasicRender {
 	public void rotate(float xAngle, float yAngle) {
 		this.xAngle += xAngle;
 		this.yAngle += yAngle;
+	}
+
+	public void destroy(){
+		int[] textureArray = {tableTexture, currentFboTexture[0]};
+		GLES20.glDeleteTextures(1, textureArray, 0);
+		GLES20.glDeleteTextures(1, textureArray, 1);
 	}
 }

@@ -41,4 +41,10 @@ public class SobelDemoActivity extends Activity {
 		super.onResume();
 		view.onResume();
 	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		render.destroy();
+	}
 }

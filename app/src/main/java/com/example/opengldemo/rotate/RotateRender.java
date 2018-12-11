@@ -172,4 +172,10 @@ public class RotateRender implements Renderer {
 		thirdRotateAngle += 3;
 		return resultMatrix;
 	}
+
+	public void destroy(){
+		int[] textureArray = {tableTexture, meshTexture};
+		GLES20.glDeleteTextures(1, textureArray, 0);
+		GLES20.glDeleteTextures(1, textureArray, 1);
+	}
 }
