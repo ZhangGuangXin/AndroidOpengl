@@ -1,6 +1,7 @@
 package com.example.opengldemo;
 
 import com.example.object.Vertices3;
+import com.example.opengldemo.AntiAliasing.AntiAliasingDemoActivity;
 import com.example.opengldemo.GaussianBlur.GaussianBlurDemoActivity;
 import com.example.opengldemo.bumpMapping.BumpMappingDemoActivity;
 import com.example.opengldemo.directLight.DirectLightDemoActivity;
@@ -141,6 +142,11 @@ public class MainActivity extends Activity{
 
 	public void normalMappingEvent(View view){
 		Intent intent = new Intent(this, NormalMappingActivity.class);
+		startActivity(intent);
+	}
+
+	public void antiAliasingEvent(View view){
+		Intent intent = new Intent(this, AntiAliasingDemoActivity.class);
 		startActivity(intent);
 	}
 

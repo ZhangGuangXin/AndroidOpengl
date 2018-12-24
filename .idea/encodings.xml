@@ -2,6 +2,8 @@
 <project version="4">
   <component name="Encoding" defaultCharsetForPropertiesFiles="GBK">
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/object/Vertices3.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/AntiAliasing/AntiAliasingDemoActivity.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/AntiAliasing/AntiAliasinglRender.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/GaussianBlur/GaussianBlurDemoActivity.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/GaussianBlur/GaussianBlurRender.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/opengldemo/bumpMapping/BumpMappingDemoActivity.java" charset="GBK" />

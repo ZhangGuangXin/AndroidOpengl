@@ -49,6 +49,7 @@
         <activity android:name="com.example.opengldemo.egl.EglTestActivity"></activity>
         <activity android:name=".shadowMapping.ShadowMappingtDemoActivity"></activity>
         <activity android:name=".normalmapping.NormalMappingActivity"></activity>
+        <activity android:name=".AntiAliasing.AntiAliasingDemoActivity"></activity>
     </application>
 
 </manifest>
