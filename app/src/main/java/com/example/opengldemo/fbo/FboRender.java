@@ -183,4 +183,10 @@ public class FboRender extends BasicRender {
 		this.xAngle += xAngle;
 		this.yAngle += yAngle;
 	}
+	
+	 public void release(){
+                GLES20.glDeleteRenderbuffers(1, depthFrameBuffer);
+                GLES20.glDeleteFramebuffers(1, customFbo);
+                GLES20.glDeleteTextures(1, currentFboTexture);
+        }
 }
