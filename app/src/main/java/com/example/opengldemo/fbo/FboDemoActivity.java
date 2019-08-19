@@ -44,4 +44,9 @@ public class FboDemoActivity extends Activity {
 		super.onResume();
 		view.onResume();
 	}
+	
+	@Override
+	protected void onDestroy(){
+		render.release();
+	}
 }
