@@ -185,8 +185,8 @@ public class FboRender extends BasicRender {
 	}
 	
 	 public void release(){
-                GLES20.glDeleteRenderbuffers(1, depthFrameBuffer);
-                GLES20.glDeleteFramebuffers(1, customFbo);
-                GLES20.glDeleteTextures(1, currentFboTexture);
+                GLES20.glDeleteRenderbuffers(1, depthFrameBuffer, 0);
+                GLES20.glDeleteFramebuffers(1, customFbo, 0);
+                GLES20.glDeleteTextures(1, currentFboTexture, 0);
         }
 }

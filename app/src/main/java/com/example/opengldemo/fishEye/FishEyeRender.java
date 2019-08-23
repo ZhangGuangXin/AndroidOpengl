@@ -16,7 +16,7 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 /**
- * ”„—€
+ * È±ºÁúº
  */
 @SuppressLint("NewApi")
 public class FishEyeRender extends BasicRender {

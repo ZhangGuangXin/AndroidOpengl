@@ -34,14 +34,14 @@ public class EGLPBHelper {
     }
 
     public void initEgl(EGLContext shareContext){
-        // 获取显示设备(默认的显示设??)
+        // 鑾峰彇鏄剧ず璁惧(榛樿鐨勬樉绀鸿??)
         eglDisplay = EGL14.eglGetDisplay(EGL14.EGL_DEFAULT_DISPLAY);
-        // 初始??
+        // 鍒濆??
         int[] version = new int[2];
         if (!EGL14.eglInitialize(eglDisplay, version, 0, version, 1)) {
             throw new RuntimeException("EGL error " + EGL14.eglGetError());
         }
-        // 获取FrameBuffer格式和能??
+        // 鑾峰彇FrameBuffer鏍煎紡鍜岃兘??
         int[] configAttribs = {
 //                EGL14.EGL_RENDERABLE_TYPE, EGL14.EGL_OPENGL_ES2_BIT,
 //                EGL14.EGL_SURFACE_TYPE, EGL14.EGL_PBUFFER_BIT, //EGL_WINDOW_BIT
@@ -66,8 +66,8 @@ public class EGLPBHelper {
             throw new RuntimeException("EGL error " + EGL14.eglGetError());
         }
         eglConfig = configs[0];
-        // 创建OpenGL上下??(可以先不设置EGLSurface，但EGLContext必须创建??
-        // 因为后面调用GLES方法基本都要依赖于EGLContext)
+        // 鍒涘缓OpenGL涓婁笅??(鍙互鍏堜笉璁剧疆EGLSurface锛屼絾EGLContext蹇呴』鍒涘缓??
+        // 鍥犱负鍚庨潰璋冪敤GLES鏂规硶鍩烘湰閮借渚濊禆浜嶦GLContext)
 
         final int[] attributes = {
                 EGL14.EGL_WIDTH, 480,
@@ -89,7 +89,7 @@ public class EGLPBHelper {
             throw new RuntimeException("EGL error " + EGL14.eglGetError());
         }
 
-        // 设置默认的上下文环境和输出缓冲区(小米4上如果不设置有效的eglSurface后面创建??色器会失败，可以先创建一个默认的eglSurface)
+        // 璁剧疆榛樿鐨勪笂涓嬫枃鐜鍜岃緭鍑虹紦鍐插尯(灏忕背4涓婂鏋滀笉璁剧疆鏈夋晥鐨別glSurface鍚庨潰鍒涘缓??鑹插櫒浼氬け璐ワ紝鍙互鍏堝垱寤轰竴涓粯璁ょ殑eglSurface)
         //EGL14.eglMakeCurrent(eglDisplay, surface.eglSurface, surface.eglSurface, eglContext);
         EGL14.eglMakeCurrent(eglDisplay, eglSurface, eglSurface, eglContext);
     }
