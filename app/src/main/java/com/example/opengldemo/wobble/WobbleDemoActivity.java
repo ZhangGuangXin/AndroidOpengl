@@ -46,4 +46,9 @@ public class WobbleDemoActivity extends Activity {
 		view.onResume();
 	}
 
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		render.release();
+	}
 }

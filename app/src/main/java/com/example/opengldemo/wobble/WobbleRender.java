@@ -108,4 +108,9 @@ public class WobbleRender extends BasicRender {
 		this.xAngle += xAngle;
 		this.yAngle += yAngle;
 	}
+
+	public void release(){
+		int[] textureArray = {meshTexture};
+		GLES20.glDeleteTextures(1, textureArray, 0);
+	}
 }

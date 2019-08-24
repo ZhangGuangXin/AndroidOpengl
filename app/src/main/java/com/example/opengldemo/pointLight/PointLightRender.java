@@ -122,4 +122,9 @@ public class PointLightRender extends BasicRender{
 		this.xAngle += xAngle;
 		this.yAngle += yAngle;
 	}
+
+	public void release(){
+		int[] textureArray = {tableTexture};
+		GLES20.glDeleteTextures(1, textureArray, 0);
+	}
 }

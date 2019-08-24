@@ -46,4 +46,9 @@ public class DirectLightDemoActivity extends Activity {
 		view.onResume();
 	}
 
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		render.release();
+	}
 }

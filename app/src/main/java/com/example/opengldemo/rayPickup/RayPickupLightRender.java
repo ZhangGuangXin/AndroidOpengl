@@ -167,4 +167,9 @@ public class RayPickupLightRender implements Renderer {
 		vector[1] /= vector[3];
 		vector[2] /= vector[3];
 	}
+
+	public void release(){
+		int[] textureArray = {tableTexture};
+		GLES20.glDeleteTextures(1, textureArray, 0);
+	}
 }

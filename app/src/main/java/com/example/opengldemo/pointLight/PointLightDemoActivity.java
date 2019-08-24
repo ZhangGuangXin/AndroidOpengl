@@ -44,4 +44,10 @@ public class PointLightDemoActivity extends Activity {
 		super.onResume();
 		view.onResume();
 	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		render.release();
+	}
 }

@@ -68,4 +68,10 @@ public class RayPickupDemoActivity extends Activity {
 			return true;
 		}
 	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		render.release();
+	}
 }

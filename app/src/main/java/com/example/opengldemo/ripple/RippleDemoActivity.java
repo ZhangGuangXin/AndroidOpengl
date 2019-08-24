@@ -142,5 +142,4 @@ public class RippleDemoActivity extends Activity {
 			Toast.makeText(this, "请开启摄像头权限", Toast.LENGTH_LONG).show();
 		}
 	}
-
 }

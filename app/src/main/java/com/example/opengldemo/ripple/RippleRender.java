@@ -270,6 +270,10 @@ public class RippleRender extends BasicRender {
             mCamera.release();
             mCamera = null;
         }
+
+        int[] textureArray = {tableTexture, meshTexture};
+        GLES20.glDeleteTextures(1, textureArray, 0);
+        GLES20.glDeleteTextures(1, textureArray, 1);
     }
 
     private float rotateModelMatrix[] = new float[16];
@@ -395,5 +399,4 @@ public class RippleRender extends BasicRender {
         }
         return returnResult;
     }
-
 }
