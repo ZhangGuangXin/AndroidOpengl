@@ -55,13 +55,15 @@ public class OpenglView extends SurfaceView implements SurfaceHolder.Callback, R
     
     @SuppressLint("NewApi")
 	@Override
-    public void run() {
+    public void run() { //该线程为前台渲染线程
+	//为前台渲染线程配置egl, 注意这里的surfaceHolder很重要，在配置的egl里创建surface的时候需要用到。相当于surfaceHolder是egl和view之间的桥梁
         Activity activity = (Activity)getContext();
         eglHelper = new EGLHelper(surfaceHolder, activity);
         eglHelper.initEgl();
         shareContext = EGL14.eglGetCurrentContext();
         eglHelper.onCreate();
 
+	//创建后台渲染线程，在后台渲染线程中会创建egl
         Context context = OpenglView.this.getContext();
         pbRender = new PbRender(surfaceHolder, context, shareContext, imageView);
         pbRender.startRender();
